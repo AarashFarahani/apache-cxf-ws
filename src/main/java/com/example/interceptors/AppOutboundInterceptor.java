@@ -1,7 +1,4 @@
-/**
- * 
- */
-package com.opencodez.service.interceptors;
+package com.example.interceptors;
 
 import org.apache.cxf.ext.logging.LoggingOutInterceptor;
 import org.apache.cxf.interceptor.Fault;

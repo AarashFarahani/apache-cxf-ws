@@ -1,4 +1,4 @@
-package com.opencodez.model;
+package com.example.model;
 
 import java.util.Date;
 

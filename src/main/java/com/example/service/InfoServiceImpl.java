@@ -1,10 +1,10 @@
-package com.opencodez.service;
+package com.example.service;
 
 import java.util.Date;
 
 import org.springframework.stereotype.Service;
 
-import com.opencodez.model.Greeting;
+import com.example.model.Greeting;
 
 @Service
 public class InfoServiceImpl implements InfoService {

@@ -10,6 +10,7 @@ import org.apache.cxf.transport.servlet.CXFServlet;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.wss4j.common.ConfigurationConstants;
 import org.apache.wss4j.dom.WSConstants;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,8 @@ import java.util.Map;
 
 @Configuration
 public class CXFConfig {
+    @Autowired private CxfCallbackHandler cxfCallbackHandler;
+
 	@Bean
 	public ServletRegistrationBean dispatcherServlet() {
         return new ServletRegistrationBean(new CXFServlet(), "/services/*");
@@ -43,7 +46,7 @@ public class CXFConfig {
         Map<String,Object> inProps = new HashMap<>();
         inProps.put(ConfigurationConstants.ACTION, ConfigurationConstants.USERNAME_TOKEN);
         inProps.put(ConfigurationConstants.PASSWORD_TYPE, WSConstants.PW_TEXT);
-        inProps.put(ConfigurationConstants.PW_CALLBACK_CLASS, CxfCallbackHandler.class.getName());
+        inProps.put(ConfigurationConstants.PW_CALLBACK_REF, this.cxfCallbackHandler);
         endpoint.getInInterceptors().add(new WSS4JInInterceptor(inProps));
 
         endpoint.publish("/InfoService");
